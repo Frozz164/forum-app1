@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"log"
 
+	_ "github.com/glebarez/sqlite" // SQLite driver
 	"github.com/google/uuid"
-	_ "github.com/mattn/go-sqlite3" // SQLite driver
 )
 
 type KeyRepository interface {
@@ -29,7 +29,7 @@ func NewSQLiteKeyRepository(dbFilePath string) (KeyRepository, error) {
 }
 
 func openOrCreateSQLiteDB(dbFilePath string) (*sql.DB, error) {
-	db, err := sql.Open("sqlite3", dbFilePath)
+	db, err := sql.Open("sqlite", dbFilePath)
 	if err != nil {
 		return nil, err
 	}
